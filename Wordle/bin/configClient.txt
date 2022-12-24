@@ -1,0 +1,4 @@
+localhost
+10000
+words.txt
+224.0.0.1

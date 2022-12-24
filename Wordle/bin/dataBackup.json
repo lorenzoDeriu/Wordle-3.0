@@ -1,0 +1,454 @@
+{
+  "currentSecreteWord": "unfilleted",
+  "nextWordChangeTime": 1671010436495,
+  "user": [
+    {
+      "username": "Mario Rossi",
+      "password": "password_1",
+      "gameRecord": [
+        {
+          "attemptsCount": 3,
+          "guessed": true,
+          "wordToGuess": "allanturic"
+        },
+        {
+          "attemptsCount": 1,
+          "guessed": true,
+          "wordToGuess": "cuttlefish"
+        }
+      ],
+      "attempt": 0,
+      "wordGuessed": false
+    },
+    {
+      "username": "Michele Verdi",
+      "password": "password_2",
+      "gameRecord": [
+        {
+          "attemptsCount": 3,
+          "guessed": true,
+          "wordToGuess": "ropedancer"
+        },
+        {
+          "attemptsCount": 12,
+          "guessed": false,
+          "wordToGuess": "superether"
+        },
+        {
+          "attemptsCount": 12,
+          "guessed": false,
+          "wordToGuess": "displenish"
+        },
+        {
+          "attemptsCount": 2,
+          "guessed": true,
+          "wordToGuess": "enrapturer"
+        },
+        {
+          "attemptsCount": 12,
+          "guessed": false,
+          "wordToGuess": "allanturic"
+        },
+        {
+          "attemptsCount": 1,
+          "guessed": true,
+          "wordToGuess": "pentandria"
+        },
+        {
+          "attemptsCount": 1,
+          "guessed": true,
+          "wordToGuess": "trispinose"
+        },
+        {
+          "attemptsCount": 12,
+          "guessed": false,
+          "wordToGuess": "terminator"
+        },
+        {
+          "attemptsCount": 3,
+          "guessed": true,
+          "wordToGuess": "litigatory"
+        },
+        {
+          "attemptsCount": 6,
+          "guessed": true,
+          "wordToGuess": "partheniae"
+        },
+        {
+          "attemptsCount": 8,
+          "guessed": true,
+          "wordToGuess": "myorrhexis"
+        },
+        {
+          "attemptsCount": 3,
+          "guessed": true,
+          "wordToGuess": "mousterian"
+        },
+        {
+          "attemptsCount": 6,
+          "guessed": true,
+          "wordToGuess": "listlessly"
+        },
+        {
+          "attemptsCount": 3,
+          "guessed": true,
+          "wordToGuess": "mortarware"
+        },
+        {
+          "attemptsCount": 1,
+          "guessed": true,
+          "wordToGuess": "ptilimnium"
+        },
+        {
+          "attemptsCount": 4,
+          "guessed": true,
+          "wordToGuess": "pythonical"
+        },
+        {
+          "attemptsCount": 2,
+          "guessed": true,
+          "wordToGuess": "cryoscopic"
+        },
+        {
+          "attemptsCount": 1,
+          "guessed": true,
+          "wordToGuess": "endodermal"
+        },
+        {
+          "attemptsCount": 1,
+          "guessed": true,
+          "wordToGuess": "ochronosis"
+        }
+      ],
+      "attempt": 0,
+      "wordGuessed": false
+    },
+    {
+      "username": "Antonio",
+      "password": "password_3",
+      "gameRecord": [
+        {
+          "attemptsCount": 6,
+          "guessed": true,
+          "wordToGuess": "glaciation"
+        },
+        {
+          "attemptsCount": 1,
+          "guessed": true,
+          "wordToGuess": "underyield"
+        },
+        {
+          "attemptsCount": 1,
+          "guessed": true,
+          "wordToGuess": "trispinose"
+        },
+        {
+          "attemptsCount": 1,
+          "guessed": true,
+          "wordToGuess": "logometric"
+        },
+        {
+          "attemptsCount": 1,
+          "guessed": true,
+          "wordToGuess": "chivalrous"
+        },
+        {
+          "attemptsCount": 12,
+          "guessed": true,
+          "wordToGuess": "organoiron"
+        },
+        {
+          "attemptsCount": 1,
+          "guessed": true,
+          "wordToGuess": "lacertidae"
+        }
+      ],
+      "attempt": 0,
+      "wordGuessed": false
+    },
+    {
+      "username": "Matteo",
+      "password": "password_4",
+      "gameRecord": [
+        {
+          "attemptsCount": 1,
+          "guessed": true,
+          "wordToGuess": "epharmonic"
+        },
+        {
+          "attemptsCount": 1,
+          "guessed": true,
+          "wordToGuess": "litigatory"
+        },
+        {
+          "attemptsCount": 1,
+          "guessed": true,
+          "wordToGuess": "endodermal"
+        },
+        {
+          "attemptsCount": 1,
+          "guessed": true,
+          "wordToGuess": "ochronosis"
+        }
+      ],
+      "attempt": 0,
+      "wordGuessed": false
+    },
+    {
+      "username": "Alessia",
+      "password": "password_5",
+      "gameRecord": [
+        {
+          "attemptsCount": 3,
+          "guessed": true,
+          "wordToGuess": "terminator"
+        }
+      ],
+      "attempt": 0,
+      "wordGuessed": false
+    },
+    {
+      "username": "Giulia",
+      "password": "password_6",
+      "gameRecord": [
+        {
+          "attemptsCount": 1,
+          "guessed": true,
+          "wordToGuess": "magirology"
+        },
+        {
+          "attemptsCount": 1,
+          "guessed": true,
+          "wordToGuess": "debatement"
+        },
+        {
+          "attemptsCount": 6,
+          "guessed": true,
+          "wordToGuess": "rectricial"
+        }
+      ],
+      "attempt": 0,
+      "wordGuessed": false
+    },
+    {
+      "username": "Alessandro",
+      "password": "password_7",
+      "gameRecord": [
+        {
+          "attemptsCount": 2,
+          "guessed": true,
+          "wordToGuess": "litigatory"
+        }
+      ],
+      "attempt": 0,
+      "wordGuessed": false
+    },
+    {
+      "username": "Francesco",
+      "password": "password_8",
+      "gameRecord": [
+        {
+          "attemptsCount": 1,
+          "guessed": true,
+          "wordToGuess": "unmoldable"
+        }
+      ],
+      "attempt": 0,
+      "wordGuessed": false
+    },
+    {
+      "username": "Federica",
+      "password": "password_9",
+      "gameRecord": [
+        {
+          "attemptsCount": 12,
+          "guessed": false,
+          "wordToGuess": "unpaternal"
+        }
+      ],
+      "attempt": 0,
+      "wordGuessed": false
+    },
+    {
+      "username": "Giovanni",
+      "password": "password_10",
+      "gameRecord": [],
+      "attempt": 0,
+      "wordGuessed": false
+    },
+    {
+      "username": "Andrea",
+      "password": "password_11",
+      "gameRecord": [
+        {
+          "attemptsCount": 8,
+          "guessed": true,
+          "wordToGuess": "unpowdered"
+        }
+      ],
+      "attempt": 0,
+      "wordGuessed": false
+    },
+    {
+      "username": "Claudia",
+      "password": "password_12",
+      "gameRecord": [],
+      "attempt": 0,
+      "wordGuessed": false
+    },
+    {
+      "username": "Mario Rossi",
+      "password": "123456789",
+      "gameRecord": [],
+      "attempt": 0,
+      "wordGuessed": false
+    },
+    {
+      "username": "Paolo",
+      "password": "1234",
+      "gameRecord": [],
+      "attempt": 0,
+      "wordGuessed": false
+    },
+    {
+      "username": "Erika",
+      "password": "0987",
+      "gameRecord": [
+        {
+          "attemptsCount": 1,
+          "guessed": true,
+          "wordToGuess": "dicotylous"
+        },
+        {
+          "attemptsCount": 1,
+          "guessed": true,
+          "wordToGuess": "sergeantcy"
+        },
+        {
+          "attemptsCount": 2,
+          "guessed": true,
+          "wordToGuess": "indevotion"
+        },
+        {
+          "attemptsCount": 2,
+          "guessed": true,
+          "wordToGuess": "pleurodont"
+        },
+        {
+          "attemptsCount": 1,
+          "guessed": true,
+          "wordToGuess": "undoubtful"
+        },
+        {
+          "attemptsCount": 3,
+          "guessed": true,
+          "wordToGuess": "scelotyrbe"
+        },
+        {
+          "attemptsCount": 2,
+          "guessed": true,
+          "wordToGuess": "aplanatism"
+        },
+        {
+          "attemptsCount": 12,
+          "guessed": false,
+          "wordToGuess": "shtokavski"
+        },
+        {
+          "attemptsCount": 1,
+          "guessed": true,
+          "wordToGuess": "pratensian"
+        },
+        {
+          "attemptsCount": 12,
+          "guessed": false,
+          "wordToGuess": "otocranium"
+        },
+        {
+          "attemptsCount": 12,
+          "guessed": false,
+          "wordToGuess": "decangular"
+        },
+        {
+          "attemptsCount": 12,
+          "guessed": false,
+          "wordToGuess": "everduring"
+        },
+        {
+          "attemptsCount": 1,
+          "guessed": true,
+          "wordToGuess": "geographic"
+        },
+        {
+          "attemptsCount": 12,
+          "guessed": false,
+          "wordToGuess": "interlight"
+        },
+        {
+          "attemptsCount": 2,
+          "guessed": true,
+          "wordToGuess": "stringwood"
+        },
+        {
+          "attemptsCount": 1,
+          "guessed": true,
+          "wordToGuess": "wearyingly"
+        },
+        {
+          "attemptsCount": 1,
+          "guessed": true,
+          "wordToGuess": "cesarolite"
+        },
+        {
+          "attemptsCount": 5,
+          "guessed": true,
+          "wordToGuess": "plastidule"
+        },
+        {
+          "attemptsCount": 4,
+          "guessed": true,
+          "wordToGuess": "angiometer"
+        },
+        {
+          "attemptsCount": 1,
+          "guessed": true,
+          "wordToGuess": "subradical"
+        },
+        {
+          "attemptsCount": 2,
+          "guessed": true,
+          "wordToGuess": "tachymetry"
+        },
+        {
+          "attemptsCount": 1,
+          "guessed": true,
+          "wordToGuess": "influxibly"
+        },
+        {
+          "attemptsCount": 1,
+          "guessed": true,
+          "wordToGuess": "lifesomely"
+        }
+      ],
+      "attempt": 0,
+      "wordGuessed": false
+    },
+    {
+      "username": "abhorrence",
+      "password": "dd",
+      "gameRecord": [],
+      "attempt": 0,
+      "wordGuessed": false
+    }
+  ],
+  "notificationSended": [
+    "Andrea ha indovinato \"unpowdered\" in 8 tentativi",
+    "Erika ha indovinato \"geographic\" in 1 tentativi",
+    "Erika ha indovinato \"cesarolite\" in 1 tentativi",
+    "Erika ha indovinato \"influxibly\" in 1 tentativi",
+    "Michele Verdi ha indovinato \"endodermal\" in 1 tentativi",
+    "Matteo ha indovinato \"endodermal\" in 1 tentativi",
+    "Michele Verdi ha indovinato \"ochronosis\" in 1 tentativi",
+    "Matteo ha indovinato \"ochronosis\" in 1 tentativi"
+  ]
+}
