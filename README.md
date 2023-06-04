@@ -1,189 +1,142 @@
 # Worlde 3.0
+### Author: Lorenzo Deriu
 
-Author: Lorenzo Deriu 
-
-# 1. Descrizione del programma
-
-Il sistema Wordle 3.0 è diviso in due componenti principali, il client e il server.
-Client e Server comunicano con un insieme di codici ClientRequest-ServerResponse ognuno rappresentante una specifica azione.
+# Program Description
+The Wordle 3.0 system is divided into two main components, the client and the server. The client and server communicate using a set of ClientRequest-ServerResponse codes, each representing a specific action.
 
 ## 1.1 Server
+The Wordle 3.0 server reads the configuration file at startup to obtain essential information for execution, such as the port to listen for new requests or the name of the file containing the fundamental vocabulary for word generation.
 
-Il server di Wordle 3.0 all’avvio legge il file di configurazioni per ottenere informazioni fondamentali per l’esecuzione, quali la porta su cui rimanere in attesa di nuove richieste o il nome del file in cui si trova il vocabolario fondamentale per la generazione delle parole.
+The server supports user login and registration functionality, allowing users 12 attempts to guess the word while keeping track of related statistics. It also supports a sharing mechanism, where each user has the option to share a message representing the outcome of the game with all connected users at the end of the game.
 
-Il server supporta le funzionalità di log-in e registrazione degli utenti, concede agli utenti 12 tentativi per indovinare la parola, tenendo traccia delle relative statistiche.
-Supporta inoltre un meccanismo di condivisione per cui ogni utente, al termine della partita, ha la possibilità di condividere a tutti gli utenti connessi un messaggio rappresentante l’esito della partita.
+### 1.1.1 Login and Registration Management
+The server handles each incoming request using the Multiplexing I/O approach. For both login and registration, the server receives the credentials from the client, verifies their validity, and sends a code representing the operation's result.
 
-### 1.1.1 Gestione del Log-in e della Registrazione
+In the case of successful login, the server starts a separate Session thread to handle the logged-in user's session, passing the client's connection to it.
 
-Il server gestisce ogni richiesta in entrata con l’approccio Multiplexing I/O.
-Sia per log-in che registrazione, il server riceverà dal client le credenziali ne verificherà la validità e invierà un codice rappresentante l’esito dell’operazione.
+### 1.1.2 Secret Word Management
+The secret word is changed by the server every time a specific time interval, read from the configuration file, elapses.
 
-Nel caso di Log-in effettuato con successo il server avvierà un’apposito thread *******Session*******, a cui verrà passata la connessione del client, e che gestirà la sessione dell’utente loggato.
+The mechanism to determine if the word should be changed is based on a comparison between System.currentTimeMillis and nextTimeToChange, which represents the moment (in milliseconds) when the next word change should occur.
 
-### 1.1.2 Gestione della parola segreta
-
-La parola segreta viene cambiata dal server ogni volta che scorre uno specifico intervallo di tempo che leggerà dal file di configurazione.
-
-Il meccanismo per stabilire se la parola va cambiata si basa su un confronto tra *System.currentTimeMillis* e il ****************nextTimeToChange**************** cioè il momento (rappresentato in millisecondi) in cui deve avvenire il prossimo cambio di parola.
-
-Se il sistema effettua il controllo oltre il *nextTimeToChange* allora la parola viene aggiornata, scegliendo in maniera random una parola dall’oggetto *Vocabulary*, dopodiché tutte le sessioni vengono notificate tramite la flag ***********wordChanged*********** del cambio, e lo stato degli utenti relativo al numero di tentativi viene resettato.
+If the system performs the check beyond nextTimeToChange, the word is updated by randomly choosing a word from the Vocabulary object. Then, all sessions are notified of the change using the wordChanged flag, and the user's attempt-related state is reset.
 
 ## 1.2 Client
+The client allows the user to choose from various actions based on the context.
 
-Il client permette all’utente di scegliere le possibili azioni in base al contesto.
+Before logging in, the options are limited to accessing a previously created account or registering a new account.
 
-Prima del log-in le possibilità si limitano ad accedere con un account creato in precedenza oppure alla registrazione di un nuovo account.
+After logging in, the user can choose to guess the word, view their statistics, view others' shares, or log out.
 
-Dopo il log-in l’utente ha la possibilità di scegliere se indovinare la parola, vedere le proprie statistiche o vedere le condivisione degli altri.
+### 1.2.1 Login and Registration
+For user registration, the system connects to the server and, once the user enters their credentials, sends the specific request code, username, and password. It then waits for a response from the server. In case of success, the server informs the user of the operation's outcome and initiates the login process. In case of failure, the server requests the credentials again.
 
-### 1.2.1 Log-in e Registrazione
+For login as well, the system connects to the server, sends the specific request code, username, and password. If the response is positive, the client displays possible actions to the user, including:
 
-Per la registrazione dell’utente il sistema, si collega al server e, una volta che l’utente ha inserito le credenziali, invia il codice della richiesta specifico, username e password.
-Dopodichè rimane in attesa di una risposta da parte del client, in caso di successo il server comunica all’utente l’esito dell’operazione e inizia il processo di Log-in.
-In caso di esito negativo il server chiede nuovamente le credenziali.
+Guessing the word
+Requesting statistics
+Viewing shares
+Logging out
+After the login confirmation, the notificationHandlerThread is launched, which remains waiting for notifications from other users.
 
-Anche per il log-in il sistema, si collega al server, invia il codice della richiesta specifico, username e password.
-Se la risposta ha esito positvo il client mostra all’utente le possibili azioni tra cui:
-  • Tentativo di indovinare la parola
-  • Richiesta delle statistiche
-  • Mostrare le condivisioni
-  • Effettuare log-out
+# Used Data Structures
+## 2.1 Server-side Data Structures
+The system stores all main data in a dedicated WordleData object.
+WordleData encapsulates an ArrayList containing all user-related data and keeps track of their username, password, the number of attempts for the current secret word, and the list of all games played by the user. It also stores the current secret word and the next word change time. WordleData also tracks all sent messages.
 
-Dopo la conferma di log-in viene fatto partire il *notificationHandlerThread* che si occupa di rimanere in attesa di notifiche provenienti dagli altri utenti.
+WordleData is saved in a ".json" file whenever the server is shut down, or after a user registration or a secret word modification, to recover all information upon startup.
 
+To obtain word feedback, the server uses the Vocabulary object, which provides an interface to access the ArrayList containing ten-character English words.
 
-# 2. Strutture dati utilizzate
+## 2.2 Client-side Data Structures
+The client uses two data structures: the Vocabulary object and the messageReceived ArrayList, which stores all received messages since connecting to the server.
 
-## 2.1 Strutture dati lato Server
+# Activated Threads
+## 3.1 Server-side Threads
+To start the server, we use the ServerStarterMain program, which initiates the WordleServer thread responsible for running the server.
+ServerStarterMain shuts down as soon as the user presses the Enter key.
 
-Il sistema memorizza tutti i dati principali in un oggetto apposito di tipo *WordleData*.
+The WordleServer thread remains running until ServerStarterMain signals the system shutdown.
 
-WordleData incapsula un’ArrayList contenente tutti i dati relativi agli utenti e, per ognuno di essi mantiene il suo username, la sua password, il numero di tentativi per la parola segreta corrente e la lista di tutte le partite da lui giocate.
-Conserva, inoltre, la parola segreta corrente e, il prossimo momento in cui la parola deve cambiare.
-WordleData tiene traccia anche di tutti i messaggi che sono stati inviati.
+The WordleServer thread, in turn, starts Session threads whose purpose is to handle the sessions of each logged-in user, while all connections aimed only at authentication are handled by the server.
 
-WordleData viene salvato in un file *“.json”* ogni volta che il server viene spento, oppure successivamente alla registrazione di un utente o la modifica della parola segreta in modo da poter recuperare tutte le informazioni all’accensione.
+## 3.2 Client-side Threads
+The WordleClientMain program's purpose is to present the various possible actions to the user and communicate the decisions to the server.
 
-Infine per ottenere il riscontro con le parole, il server utilizza l’oggetto *Vocabulary*, che fornisce un’interfaccia per l’accesso all’ArrayList contenente le parole della lingua inglese composte da dieci caratteri.
+Upon receiving a successful login operation, WordleClientMain starts the NotificationHandlerThread, which remains waiting for new notifications as long as the client is connected and collects them in the dedicated messageReceived data structure.
 
-## 2.2 Strutture dati lato Client
+# Synchronization Mechanisms
+The WordleData object is implemented as a monitor since it is shared among all Session threads that access user data, the secret word, and the next change time for both read and write operations.
+In particular, the need for synchronization arises from critical operations such as:
 
-Il client utilizza due strutture dati: l’oggetto *Vocabulary* e l’ArrayList *messageReceived* che conserva tutti i messaggi ricevuti dal momento in cui si è collegato al server.
-
-
-# 3. Thread Attivati
-
-## 3.1 Thread lato Server
-
-Per avviare il server usiamo il programma *ServerStarterMain*, il quale avvia il thread ************WordleServer************ che andrà a eseguire il server.
-
-*ServerStarterMain* si spegnerà non appena l’utente premerà il tasto *Enter.*
-
-Il thread *WordleServer* rimarrà in esecuzione finchè *ServerStarterMain* non comunicherà la volontà di spegnere il sistema.
-
-Il thread *WordleServer* avvierà, a sua volta, dei thread *Session*, il cui scopo è quello di gestire le sessioni di ogni utente una volta loggati, mentre tutte le connessioni che hanno come scopo la sola autenticazione vengono gestite dal server.
-
-## 3.2 Thread lato Client
-
-Il programma *WordleClientMain* ha lo scopo di illustrare all’utente le varie azioni possibili e comunicare al server le decisioni prese.
-
-*WordleClientMain* avvia, una volta ricevuto esito positivo dall’operazione di log-in, il thread *NotificationHandlerThread* che rimane in attesa per tutto il tempo in cui il client è connesso di nuove notifiche e le raccoglie all’interno della struttura dati apposita messageReceived.
-
-
-# 4. Meccanismi di sincronizzazione
-
-L’oggetto *WordleData* è implementato come un Monitor, poichè viene condiviso tra tutti i thread Session che accedono in letture e in scrittura ai dati degli utenti, alla parola segreta e al momento in cui dovrà cambiare.
-
-In particolare la necessità di sincronizzare gli accessi nasce da operazioni critiche quali:
-
-- La registrazione di un nuovo utente, nel caso in cui due utenti con lo stesso username stiano cercando di registrarsi contemporaneamente.
-- La modifica della parola segreta, nel caso in cui un thread *Session* cercasse di accedere alla parola quando il tempo per poterla indovinare è scaduto, e il server non ha ancora notificato il cambio.
-
-
-# 5. Istruzioni di compilazione
-
-Per compilare il programma è necessario eseguire i seguenti comandi:
-
+Registering a new user when two users with the same username are attempting registration simultaneously.
+Modifying the secret word when a Session thread tries to access the word after the guessing time has expired and the server has not yet notified the change.
+Compilation Instructions
+To compile the program, execute the following commands:
 ```
 $ cd Wordle/src/
 ~/Wordle/src/ $ javac -cp "./../libs/gson-2.10.jar" ./*.java -d ./../bin
 ```
 
-Quest’ultimo comando avrà l’effetto di creare all’interno della cartella bin tutti i file *“.class”*, da cui poi potremmo andare a eseguire il sistema*.*
+The above command will create the ".class" files inside the bin folder, from which the system can be executed.
 
-Dopo la compilazione è possibile andare a effettuare la creazione del file *“.jar”* del server e del client.
+After compilation, the server and client ".jar" files can be created.
 
-Per quanto riguarda il server i comandi sono i seguenti:
+For the server, use the following commands:
 
 ```
 ~ $ cd Wordle/bin/
 ~/Wordle/bin/ $ jar cfm Server.jar Server-Manifest.txt *.class
 ```
 
-Per il client:
-
+For the client:
 ```
 ~ $ cd Wordle/bin/
 ~/Wordle/bin/ $ jar cfm Client.jar Client-Manifest.txt *.class
 ```
-
-# 6. Istruzioni di esecuzione
-
-Sia il client che il server hanno a disposizione un file di configurazione, “configClient.txt” e configServer.txt, la loro struttura è la seguente:
-
-*configClient.txt*
-
+# Execution Instructions
+Both the client and the server have configuration files available, "configClient.txt" and "configServer.txt," respectively. Their structure is as follows:
+### configClient.txt:
 ```
-indirizzo_server
-porta_server
-file_parole
-indirizzo_multicast
+server_address
+server_port
+word_file
+multicast_address
 ```
 
-*configServer.txt*
-
+### configServer.txt:
 ```
-porta_server
-file_parole
-intervallo_parola_segreta_millisec
-indirizzo_multicast
+server_port
+word_file
+secret_word_interval_millisec
+multicast_address
 ```
+The configuration files are read at startup, and the data is verified.
 
-I file di configurazione vengono letti al momento di avvio, e i dati vengono verificati.
+There is also a backup file, "dataBackup.json," containing all information related to users, the secret word, and the next word change time.
 
-È presente anche un file di backup, *“dataBackup.json”* contenente tutte le informazioni relative agli utenti la parola segreta e il prossimo momento in cui deve cambiare la parola.
+If the dataBackup file is empty, the server initializes it again at startup, populating it with new information generated during execution.
 
-Se **********dataBackup********** viene svuotato, al momento dell’avvio il server lo inizializza nuovamente, riempiendolo con le nuove informazioni generate durante l’esecuzione.
-
-I comandi per eseguire il server sono i seguenti:
-
+The commands to execute the server are as follows:
 ```
 ~ $ cd Wordle/bin/
 ~/Wordle/bin/ $ java -cp ".:./../libs/gson-2.10.jar" ServerStarterMain
 ```
+The server will start, and to terminate its execution, simply press the Enter key. The server will be notified of the intention to terminate, shut down all Session threads, and perform a data backup.
 
-Il server verrà avviato è per terminare la sua esecuzione sarà sufficente premere il tasto *Enter*;
-verrà comunicato al server la volontà di terminare l’esecuzione, che terminerà tutti i thread *Session* e effettureà un backup dei dati.
-
-Per eseguire il client i comandi sono:
-
+To execute the client, use the following commands:
 ```
 ~ $ cd Wordle/bin/
 ~/Wordle/bin/ $ java -cp ".:./../libs/gson-2.10.jar" WordleClientMain
 ```
-
-Per l’esecuzione dei file “.jar”:
+For executing the ".jar" files:
 
 Server:
-
 ```
 ~ $ cd Wordle/bin/
 ~/Wordle/bin/ $ java -jar Server.jar
 ```
-
 Client:
-
 ```
 ~ $ cd Wordle/bin/
 ~/Wordle/bin/ $ java -jar Client.jar
